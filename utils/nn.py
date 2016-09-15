@@ -94,5 +94,5 @@ def _get_dims(shape):
 
 
 def _get_shape(x):
-    return [int(x.get_shape()[i]) for i in range(len(x.get_shape()))]
+    return x.get_shape().as_list()
 
