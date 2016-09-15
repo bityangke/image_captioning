@@ -5,23 +5,18 @@ import tensorflow as tf
 def weight(name, shape, init='he', range=1, stddev=0.33, init_val=None):
     if init_val is not None:
         initializer = tf.constant_initializer(init_val)
-
     elif init == 'uniform':
         initializer = tf.random_uniform_initializer(-range, range)
-
     elif init == 'normal':
         initializer = tf.random_normal_initializer(stddev = stddev)
-
     elif init == 'he':
         fan_in, _ = _get_dims(shape)
         std = math.sqrt(2.0 / fan_in)
         initializer = tf.random_normal_initializer(stddev = std)
-
     elif init == 'xavier':
         fan_in, fan_out = _get_dims(shape)
         range = math.sqrt(6.0 / (fan_in + fan_out))
         initializer = tf.random_uniform_initializer(-range, range)
-
     else:
         initializer = tf.truncated_normal_initializer(stddev = stddev)
 
@@ -59,13 +54,10 @@ def batch_norm(x, name, is_train):
 def nonlinear(x, nl=None):
     if nl == 'relu':
         return tf.nn.relu(x)
-
     elif nl == 'tanh':
         return tf.tanh(x)
-
     elif nl == 'sigmoid':
         return tf.sigmoid(x)
-
     else:
         return x
 
